@@ -1,0 +1,38 @@
+{% extends "learning_logs/base.html" %}
+
+{% block header %}
+ <h2> <a href="{% url 'topic' topic.id %}">{{topic}}</a></h2>
+{% endblock %}
+
+{% block content %}
+
+   
+
+   
+
+    
+        <a href="{% url 'new_entry' topic.id %}">Adicione uma nova anotação</a>
+    
+
+    
+        {% for entry in entries %}
+            <div class="panel panel-default" >
+                <div class="panel-heading">
+                    <h4>
+                    {{entry.date_added | date:'M d, Y H:i'}}
+                     <small>
+                       <a href="{% url 'edit_entry' entry.id %}">Editar anotação</a>
+                     </small>
+                    </h4>
+                </div>   
+                <div class="panel-body" >
+                {{entry.text | linebreaks }}
+                </div>
+            </div>
+        {% empty %}
+
+        Não há registro
+
+        {% endfor %}
+    
+{% endblock content %}
